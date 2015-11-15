@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+  <title>{% block title %}Cocktail Mixer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.css') }}"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <script src="{{ url_for('static', filename='lib/jquery-2.1.4.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.js') }}"></script>
+  <!-- Per page includes -->
+  {% block includes %}{% endblock %}
+  <!-- Per page includes -->
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('.index') }}">{{ self.title() }}</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="container">
+    <!-- Example row of columns -->
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+        <p>&copy; Cocktail Mixer</p>
+    </footer> 
+  </div>
+{% block endscript %}
+{% endblock %}
+</body>

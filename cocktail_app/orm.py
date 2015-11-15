@@ -17,25 +17,35 @@ class cocktail(Base):
   __tablename__ = 'cocktails'
   __table_args__ = {'schema': SCHEMA}
 
-  id = Column(INTEGER, primary_key=True, nullable = False)
-  name = Column(VARCHAR(255), nullable = True)
-  image_location = Column(VARCHAR(255), nullable = True)
+  safe_columns = ["name"]
 
-class ingredient_in_cocktail(Base):
-  __tablename__ = 'ingredients_in_cocktails'
-  __table_args__ = {'schema': SCHEMA}
   id = Column(INTEGER, primary_key=True, nullable = False)
-  parts = Column(FLOAT, nullable = False)
-  cocktail_id = Column(Integer, ForeignKey('cocktail.id'))
-  ingredient_id = Column(Integer, ForeignKey('ingredient.id'))
-  
-  cocktails = relationship("cocktail", backref=backref('ingredient_in_cocktail', order_by=id))
-  ingredients = relationship("ingredient", backref=backref('ingredient_in_cocktail', order_by=id))
+  name = Column(VARCHAR(255), nullable = True, unique=True)
+  image_location = Column(VARCHAR(255), nullable = True)
 
 class ingredient(Base):
   __tablename__ = 'ingredients'
   __table_args__ = {'schema': SCHEMA}
 
+  safe_columns = ["name"]
+
   id = Column(INTEGER, primary_key=True, nullable = False)
-  name = Column(VARCHAR(255), nullable = True)
+  name = Column(VARCHAR(255), nullable = True, unique=True)
+  available = Column(BOOLEAN, nullable = True)
   image_location = Column(VARCHAR(255), nullable = True)
+
+class ingredient_in_cocktail(Base):
+  __tablename__ = 'ingredients_in_cocktails'
+  __table_args__ = {'schema': SCHEMA}
+
+  safe_columns = ["parts","cocktail_id","ingredient_id"]
+
+  id = Column(INTEGER, primary_key=True, nullable = False)
+  parts = Column(FLOAT, nullable = False)
+  cocktail_id = Column(INTEGER, ForeignKey(cocktail.id, onupdate="CASCADE", ondelete="CASCADE"), nullable = False)
+  ingredient_id = Column(INTEGER, ForeignKey(ingredient.id, onupdate="CASCADE", ondelete="CASCADE"), nullable = False)
+
+  cocktail = relationship("cocktail", backref="ingredients_in_cocktail")
+  ingredient = relationship("ingredient", backref="cocktails_is_in")
+
+

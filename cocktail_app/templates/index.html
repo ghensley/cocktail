@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Cocktail Mixer{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table" id="routes-table-container">
+          <thead> 
+            <tr><th>Cocktail</th><th>Ingredients</th><th>
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="/create_cocktail" class="btn btn-info pull-right" role="button">Create Cocktail</a>
+                </div>
+                <div class="col-md-6">
+                  <a href="/create_ingredient" class="btn btn-info pull-right" role="button">Create Ingredient</a>  
+                </div>
+              </div>
+            </th></tr>
+          </thead>
+          <tbody>
+          {% for cocktail in cocktails %}
+            <tr {% if cocktail.available == True %}class="success"{% endif %}><td><b>{{cocktail.name}}</b></td><td>{% for ingredient in cocktail.ingredients %}<b>{{ ingredient.name }}</b>({{ ingredient.parts }})&nbsp{% endfor %}</td><td><a href="/add_ingredient_to_cocktail/{{ cocktail.id }}" class="btn btn-info pull-right" role="button">Add Ingredient</a></td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
