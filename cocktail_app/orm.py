@@ -27,7 +27,7 @@ class ingredient(Base):
   __tablename__ = 'ingredients'
   __table_args__ = {'schema': SCHEMA}
 
-  safe_columns = ["name"]
+  safe_columns = ["name","available"]
 
   id = Column(INTEGER, primary_key=True, nullable = False)
   name = Column(VARCHAR(255), nullable = True, unique=True)

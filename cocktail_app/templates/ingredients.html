@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Ingredients{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-inline"><li><a href="/create_ingredient" class="btn btn-info pull-right" role="button">Create Ingredient</a></li></ul>
+      <div class="table-responsive">
+        <form action="#" method="post">
+        <table class="table table-condensed" id="routes-table-container">
+          <thead> 
+            <tr><th>Ingredient</th><th>Available</th></tr>
+          </thead>
+          <tbody>
+          {% for ingredient in ingredients %}
+            <tr {% if ingredient.available == True %}class="success"{% endif %}>
+              <td><b>{{ingredient.name}}</b></td>
+              <td>
+                <div class="checkbox">
+                  <label><input name="{{ ingredient.id }}" type="checkbox" {% if ingredient.available == True %}checked{% endif %}></label>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <button type="submit" class="pull-right btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

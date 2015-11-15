@@ -1,31 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Cocktail Mixer{% endblock %}
 {% block content %}
-<div class="container">
   <div class="row">
     <div class="col-md-12">
+      <ul class="list-inline">
+        <li><a href="/ingredients" class="btn btn-info pull-right" role="button">Ingredients</a></li>
+        <li><a href="/create_cocktail" class="btn btn-info pull-right" role="button">Create Cocktail</a></li>
+        <li><a href="/create_ingredient" class="btn btn-info pull-right" role="button">Create Ingredient</a></li>
+      </ul>
       <div class="table-responsive">
         <table class="table" id="routes-table-container">
           <thead> 
-            <tr><th>Cocktail</th><th>Ingredients</th><th>
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="/create_cocktail" class="btn btn-info pull-right" role="button">Create Cocktail</a>
-                </div>
-                <div class="col-md-6">
-                  <a href="/create_ingredient" class="btn btn-info pull-right" role="button">Create Ingredient</a>  
-                </div>
-              </div>
-            </th></tr>
+            <tr><th>Cocktail</th><th>Ingredients</th><th></th></tr>
           </thead>
           <tbody>
           {% for cocktail in cocktails %}
-            <tr {% if cocktail.available == True %}class="success"{% endif %}><td><b>{{cocktail.name}}</b></td><td>{% for ingredient in cocktail.ingredients %}<b>{{ ingredient.name }}</b>({{ ingredient.parts }})&nbsp{% endfor %}</td><td><a href="/add_ingredient_to_cocktail/{{ cocktail.id }}" class="btn btn-info pull-right" role="button">Add Ingredient</a></td></tr>
+            <tr {% if cocktail.available == True %}class="success"{% endif %}><td><b>{{cocktail.name}}</b></td><td><ul class="list-inline">{% for ingredient in cocktail.ingredients %}<li><b>{{ ingredient.name }}</b><i>({{ ingredient.parts }})</i></li>{% endfor %}</ul></td><td><a href="/add_ingredient_to_cocktail/{{ cocktail.id }}" class="btn btn-primary btn-sm pull-right" role="button">Add Ingredient</a></td></tr>
           {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}

@@ -29,6 +29,9 @@ class dao_session:
         ingredient = cocktail_orm.ingredient()
         dao_session.setAttrsSafe(ingredient, attrs)
         self.session.add(ingredient)
+    def edit_ingredient(self,id, attrs):
+        ingredient = self.session.query(cocktail_orm.ingredient).filter(cocktail_orm.ingredient.id == id).first()
+        dao_session.setAttrsSafe(ingredient, attrs)        
     def create_cocktail(self,attrs):
         cocktail = cocktail_orm.cocktail()
         dao_session.setAttrsSafe(cocktail, attrs)

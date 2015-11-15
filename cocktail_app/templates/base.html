@@ -6,6 +6,7 @@
   </script>
   <title>{% block title %}Cocktail Mixer{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='cocktail.css') }}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <script src="{{ url_for('static', filename='lib/jquery-2.1.4.min.js') }}"></script>
@@ -31,13 +32,15 @@
     </div>
   </nav>
   <div class="container">
+  <div class="well">
     <!-- Example row of columns -->
     {% block content %}
 
     {% endblock %}
     <footer>
         <p>&copy; Cocktail Mixer</p>
-    </footer> 
+    </footer>
+  </div>
   </div>
 {% block endscript %}
 {% endblock %}

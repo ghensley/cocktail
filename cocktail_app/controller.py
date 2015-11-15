@@ -28,9 +28,22 @@ def index():
 @app.route('/ingredients', methods=['GET','POST'])
 def ingredients():
   db = current_app.config["cocktail.db"]
-  if request.method == 'GET':
-    with dao.dao_session(db()) as dbo:
-      return render_template('ingredients.html', dbo.ingredients()) 
+  with dao.dao_session(db()) as dbo:
+    if request.method == 'POST':
+      print request.form
+      ingredients = dbo.ingredients()
+      checked = []
+      for e in request.form:
+        checked.append(int(e))
+      print checked
+      for ingredient in ingredients:
+        if ingredient.id in checked:
+          dbo.edit_ingredient(ingredient.id, {"available":True})
+        else:
+          dbo.edit_ingredient(ingredient.id, {"available":False})
+      
+      
+    return render_template('ingredients.html', ingredients=dbo.ingredients())
 
 @app.route('/create_cocktail', methods=['GET','POST'])
 def create_cocktail():
