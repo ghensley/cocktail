@@ -1,0 +1,116 @@
+-- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: cocktail
+-- ------------------------------------------------------
+-- Server version	5.5.46-0ubuntu0.14.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `cocktail`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `cocktail` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `cocktail`;
+
+--
+-- Table structure for table `cocktails`
+--
+
+DROP TABLE IF EXISTS `cocktails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cocktails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `image_location` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cocktails`
+--
+
+LOCK TABLES `cocktails` WRITE;
+/*!40000 ALTER TABLE `cocktails` DISABLE KEYS */;
+INSERT INTO `cocktails` VALUES (1,'Martini',NULL),(2,'Kamikaze',NULL),(3,'Margarita',NULL),(4,'Cosmopolitan',NULL),(7,'Mojito',NULL),(8,'Mai Tai',NULL),(10,'Rum and Coke',NULL),(11,'The Jenna',NULL),(12,'Vodka Martini',NULL),(13,'Whiskey and Coke',NULL),(14,'Screwdriver',NULL),(15,'Sex on the Beach',NULL),(16,'Tequila Sunrise',NULL),(17,'Vodka and Cranberry',NULL),(18,'Manhattan',NULL),(19,'Bacardi',NULL),(20,'Aviation',NULL),(21,'Daquiri',NULL),(22,'John Collins',NULL),(23,'Old Fashioned',NULL),(24,'Planter\'s Punch',NULL),(25,'Black Russian',NULL),(26,'White Russian',NULL),(27,'Vodka Tonic',NULL),(28,'Gin and Tonic',NULL),(29,'Whiskey Sour',NULL),(30,'Bay Breeze',NULL),(31,'Monkey Gland',NULL),(32,'White Lady',NULL),(33,'Mary Pickford',NULL),(34,'Cuba Libre',NULL),(35,'Grasshopper',NULL),(36,'Moscow Mule',NULL),(37,'Sea Breeze',NULL),(38,'B-52',NULL),(39,'Dark \'N\' Stormy',NULL),(40,'Alexander',NULL),(41,'Brave Bull',NULL),(42,'Dirty Mother',NULL),(43,'Godfather',NULL),(44,'Godmother',NULL),(45,'Green Hornet',NULL),(46,'Brandy Alexander',NULL),(47,'Chocolate Martini',NULL),(48,'Brass Monkey',NULL),(49,'El Presidente',NULL),(50,'Staten Island Ferry',NULL),(51,'Matador',NULL),(52,'Tequila and Tonic',NULL),(53,'Colombia',NULL),(54,'Greyhound',NULL),(55,'Gimlet',NULL),(56,'Rose Kennedy',NULL),(57,'Woo Woo',NULL),(58,'Russian Sunrise',NULL),(60,'Bronx',NULL),(61,'Churchhill',NULL),(62,'Tom Collins',NULL),(63,'Orgasm',NULL),(64,'Chicago',NULL),(65,'South Side',NULL);
+/*!40000 ALTER TABLE `cocktails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ingredients`
+--
+
+DROP TABLE IF EXISTS `ingredients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ingredients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `image_location` varchar(255) DEFAULT NULL,
+  `available` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+LOCK TABLES `ingredients` WRITE;
+/*!40000 ALTER TABLE `ingredients` DISABLE KEYS */;
+INSERT INTO `ingredients` VALUES (1,'Gin',NULL,1),(2,'Vodka',NULL,1),(3,'Dry Vermouth',NULL,0),(4,'Sweet Vermouth',NULL,0),(5,'Rum',NULL,1),(6,'Whiskey',NULL,0),(7,'Club Soda',NULL,0),(8,'Sprite',NULL,0),(9,'Grenadine',NULL,1),(10,'Tequila',NULL,0),(11,'Triple Sec',NULL,1),(12,'Lime Juice',NULL,0),(13,'Simple Syrup',NULL,0),(14,'Orange Juice',NULL,0),(15,'Bitters',NULL,0),(17,'Cranberry Juice',NULL,1),(18,'Pineapple Juice',NULL,0),(19,'Dark Rum',NULL,0),(20,'Coca Cola',NULL,0),(22,'Peach Schnapps',NULL,0),(23,'Lemon Juice',NULL,0),(24,'Marischino',NULL,0),(25,'Creme De Menthe',NULL,0),(26,'Creme De Cacao',NULL,0),(27,'Irish Cream',NULL,0),(28,'Coffee Liquor',NULL,0),(29,'Godiva Chocolate Liquor',NULL,0),(30,'Tonic Water',NULL,0),(31,'Milk',NULL,0),(32,'Absinthe',NULL,0),(33,'Ginger Beer',NULL,0),(34,'Grapefruit Juice',NULL,0),(35,'Brandy',NULL,0),(36,'Amaretto',NULL,0),(37,'Scotch',NULL,0),(38,'Malibu',NULL,0),(39,'Blue Curacao',NULL,0);
+/*!40000 ALTER TABLE `ingredients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ingredients_in_cocktails`
+--
+
+DROP TABLE IF EXISTS `ingredients_in_cocktails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ingredients_in_cocktails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parts` float NOT NULL,
+  `cocktail_id` int(11) NOT NULL,
+  `ingredient_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cocktail_id` (`cocktail_id`),
+  KEY `ingredient_id` (`ingredient_id`),
+  CONSTRAINT `ingredients_in_cocktails_ibfk_1` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktails` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ingredients_in_cocktails_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ingredients_in_cocktails`
+--
+
+LOCK TABLES `ingredients_in_cocktails` WRITE;
+/*!40000 ALTER TABLE `ingredients_in_cocktails` DISABLE KEYS */;
+INSERT INTO `ingredients_in_cocktails` VALUES (1,6,1,1),(2,1,1,3),(3,1,2,12),(4,1,2,11),(5,1,2,2),(6,1.5,3,12),(7,2,3,11),(8,3.5,3,10),(9,1.5,4,11),(10,1.5,4,12),(11,3,4,17),(12,4,4,2),(13,4,7,5),(14,3,7,12),(15,1,8,12),(16,1.5,8,13),(17,1.5,8,11),(18,2,8,19),(19,4,8,5),(20,1,10,19),(21,1,10,20),(23,1,11,6),(24,1,12,2),(25,6,12,3),(26,1,13,6),(27,1,13,20),(28,2,14,14),(29,1,14,2),(30,2,15,22),(31,4,15,17),(32,4,15,14),(33,4,15,2),(34,9,16,14),(35,4.5,16,10),(36,1.5,16,9),(37,1,17,2),(38,1,17,17),(39,0.1,18,15),(40,5,18,6),(41,2,18,4),(42,4.5,19,5),(43,2,19,12),(44,1,19,9),(45,4.5,20,1),(46,1.5,20,23),(47,1.5,20,24),(48,4.5,21,5),(49,2.5,21,12),(50,1.5,21,13),(51,3,22,1),(52,2,22,23),(53,1,22,13),(54,4,22,7),(55,4.5,23,6),(56,0.1,23,15),(57,2,23,13),(58,4.5,24,19),(59,3.5,24,14),(60,3.5,24,18),(61,2,24,23),(62,1,24,9),(63,1,24,13),(64,0.1,24,15),(65,5,25,2),(66,2,25,28),(67,3,26,31),(68,5,26,2),(69,2,26,28),(70,1,27,2),(71,1,27,30),(72,1,28,1),(73,1,28,30),(74,3,29,6),(75,2,29,23),(76,1,29,13),(77,2,30,2),(78,6,30,17),(79,1.5,30,18),(80,0.2,31,32),(81,0.2,31,9),(82,3,31,14),(83,5,31,1),(84,4,32,1),(85,3,32,11),(86,2,32,23),(87,6,33,5),(88,6,33,18),(89,1,33,9),(90,1,33,24),(91,12,34,20),(92,5,34,5),(93,1,34,12),(94,3,35,26),(95,3,35,25),(96,3,35,31),(97,9,36,2),(98,1,36,12),(99,24,36,33),(100,4,37,2),(101,12,37,17),(102,3,37,34),(103,1,38,28),(104,1,38,11),(105,1,38,27),(106,6,39,19),(107,10,39,33),(108,1,40,1),(109,1,40,26),(110,1,40,31),(111,1,41,10),(112,1,41,28),(113,1,42,35),(114,3,42,28),(115,1,43,37),(116,1,43,36),(117,1,44,2),(118,1,44,36),(119,5,45,35),(120,2,45,25),(121,1,46,35),(122,1,46,26),(123,1,46,31),(124,1,47,29),(125,2,47,2),(126,1,47,31),(127,1,48,19),(128,1,48,2),(129,1,48,14),(130,2,49,5),(131,1,49,11),(132,1,49,3),(133,0.2,49,9),(134,1,50,38),(135,1,50,18),(136,1,51,10),(137,2,51,18),(138,0.5,51,12),(139,1,52,10),(140,1,52,30),(141,2,53,2),(142,1,53,39),(143,1,53,9),(144,1,53,23),(145,6,53,14),(146,1,54,1),(147,4,54,34),(148,4,55,1),(149,1,55,12),(150,2,56,2),(151,2,56,7),(152,1,56,17),(153,2,57,2),(154,1,57,22),(155,4,57,17),(156,3,58,2),(157,6,58,14),(158,1,58,9),(159,6,60,1),(160,3,60,4),(161,2,60,3),(162,3,60,14),(163,3,61,37),(164,1,61,12),(165,1,61,4),(166,1,61,11),(167,3,62,1),(168,2,62,23),(169,1,62,13),(170,4,62,7),(171,1,63,36),(172,1,63,28),(173,1,63,27),(174,2,64,35),(175,1,64,11),(176,0.1,64,15),(177,8,65,1),(178,3,65,23),(179,3,65,13);
+/*!40000 ALTER TABLE `ingredients_in_cocktails` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-11-15  8:52:07

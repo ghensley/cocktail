@@ -71,4 +71,4 @@ def add_ingredient_to_cocktail(id):
       return render_template('add_ingredient_to_cocktail.html', ingredients = dbo.ingredients(), cocktail_id = id)
   with dao.dao_session(db()) as dbo:
     dbo.add_ingredient_to_cocktail(request.form)
-    return redirect(url_for('index'))  
+    return redirect(url_for('add_ingredient_to_cocktail', id=id))  
