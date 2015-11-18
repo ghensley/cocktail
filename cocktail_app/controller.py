@@ -30,17 +30,29 @@ def ingredients():
   db = current_app.config["cocktail.db"]
   with dao.dao_session(db()) as dbo:
     if request.method == 'POST':
-      print request.form
       ingredients = dbo.ingredients()
       checked = []
+      slot = {}
       for e in request.form:
-        checked.append(int(e))
+        f = e.split("_")
+        if f[0] == "checked":
+          checked.append(int(f[1]))
+        elif f[0] == "slot":
+          if request.form[e]!="None":
+            print request.form[e]
+            slot[int(f[1])] = int(request.form[e])
+      
+      print slot 
       print checked
       for ingredient in ingredients:
         if ingredient.id in checked:
           dbo.edit_ingredient(ingredient.id, {"available":True})
         else:
           dbo.edit_ingredient(ingredient.id, {"available":False})
+        if ingredient.id in slot:
+          dbo.edit_ingredient(ingredient.id, {"slot": slot[ingredient.id]})
+        else:
+          dbo.edit_ingredient(ingredient.id, {"slot": None})
       
       
     return render_template('ingredients.html', ingredients=dbo.ingredients())

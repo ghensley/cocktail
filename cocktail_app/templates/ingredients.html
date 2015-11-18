@@ -8,7 +8,7 @@
         <form action="#" method="post">
         <table class="table table-condensed" id="routes-table-container">
           <thead> 
-            <tr><th>Ingredient</th><th>Available</th></tr>
+            <tr><th>Ingredient</th><th>Available</th><th>Slot</th></tr>
           </thead>
           <tbody>
           {% for ingredient in ingredients %}
@@ -16,7 +16,20 @@
               <td><b>{{ingredient.name}}</b></td>
               <td>
                 <div class="checkbox">
-                  <label><input name="{{ ingredient.id }}" type="checkbox" {% if ingredient.available == True %}checked{% endif %}></label>
+                  <label><input name="checked_{{ ingredient.id }}" type="checkbox" {% if ingredient.available == True %}checked{% endif %}></label>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <select type="text" class="form-control" name="slot_{{ ingredient.id }}">
+                    <option>None</option>
+                    <option {% if ingredient.slot == 1 %}selected{% endif%}>1</option>
+                    <option {% if ingredient.slot == 2 %}selected{% endif%}>2</option>
+                    <option {% if ingredient.slot == 3 %}selected{% endif%}>3</option>
+                    <option {% if ingredient.slot == 4 %}selected{% endif%}>4</option>
+                    <option {% if ingredient.slot == 5 %}selected{% endif%}>5</option>
+                    <option {% if ingredient.slot == 6 %}selected{% endif%}>6</option>
+                  <select>
                 </div>
               </td>
             </tr>

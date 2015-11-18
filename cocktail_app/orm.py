@@ -27,12 +27,13 @@ class ingredient(Base):
   __tablename__ = 'ingredients'
   __table_args__ = {'schema': SCHEMA}
 
-  safe_columns = ["name","available"]
+  safe_columns = ["name","available","slot"]
 
   id = Column(INTEGER, primary_key=True, nullable = False)
   name = Column(VARCHAR(255), nullable = True, unique=True)
   available = Column(BOOLEAN, nullable = True)
   image_location = Column(VARCHAR(255), nullable = True)
+  slot = Column(INTEGER, nullable = True)
 
 class ingredient_in_cocktail(Base):
   __tablename__ = 'ingredients_in_cocktails'
