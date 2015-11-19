@@ -3,7 +3,7 @@ from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-
+app.secret_key = "Greysmostsecretofkeys"
 import cocktail_app.controller
 
 DB_URI = "mysql://cocktail@localhost/cocktail"

@@ -17,6 +17,16 @@
   <!-- Per page includes -->
 </head>
 <body>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+    </div>
+  {% endif %}
+  {% endwith %}
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
       <div class="navbar-header">

@@ -18,11 +18,11 @@ class dao_session:
     def cocktails(self):
         query = self.session.query(cocktail_orm.cocktail).order_by("name asc")
         return query.all()
+    def cocktail(self, id):
+        return self.session.query(cocktail_orm.cocktail).filter(cocktail_orm.cocktail.id == id).first()
     def ingredients(self):
         query = self.session.query(cocktail_orm.ingredient).order_by("name asc")
         return query.all()
-    def cocktail(self, id):
-        return self.session.query(cocktail_orm.cockail).filter(cocktail_orm.cocktail.id == id).first()
     def ingredient(self, id):
         return self.session.query(cocktail_orm.ingredient).filter(cocktail_orm.ingredient.id == id).first()
     def create_ingredient(self,attrs):

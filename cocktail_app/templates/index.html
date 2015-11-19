@@ -15,7 +15,7 @@
           </thead>
           <tbody>
           {% for cocktail in cocktails %}
-            <tr {% if cocktail.available == True %}class="success"{% endif %}><td><b>{{cocktail.name}}</b></td><td><ul class="list-inline">{% for ingredient in cocktail.ingredients %}<li><b>{{ ingredient.name }}</b><i>({{ ingredient.parts }})</i></li>{% endfor %}</ul></td><td><a href="/add_ingredient_to_cocktail/{{ cocktail.id }}" class="btn btn-primary btn-sm pull-right" role="button">Add Ingredient</a></td></tr>
+            <tr {% if cocktail.available == True %}class="success"{% endif %}><td><b>{{cocktail.name}}</b></td><td><ul class="list-inline">{% for ingredient in cocktail.ingredients %}<li><b>{{ ingredient.name }}</b><i>({{ ingredient.parts }})</i></li>{% endfor %}</ul></td><td><a href="/make_cocktail/{{ cocktail.id }}" class="btn btn-primary btn-sm pull-right" role="button">Make Cocktail</a></td></tr>
           {% endfor %}
           </tbody>
         </table>
