@@ -1,8 +1,12 @@
 from flask import flash, g, Blueprint, render_template, current_app, request, redirect, url_for
-from cocktail_app import app
 import dao
 import thread
 import time
+import config as cfg
+
+app = Flask(__name__)
+
+app.secret_key = cfg.secret_key
 
 GPIO_DICT = {}
 mark = {}
@@ -106,7 +110,7 @@ def pour(slot, length_of_pour, pre_wait):
   f.close()
 @app.route('/make_cocktail/<int:id>')
 def make_cocktail(id):
-  total_pour_time = 6.0
+  total_pour_time = 10.0
   longest_pour = 0.0
   db = current_app.config["cocktail.db"]
   with dao.dao_session(db()) as dbo:
@@ -152,4 +156,6 @@ def add_ingredient_to_cocktail(id):
       return render_template('add_ingredient_to_cocktail.html', ingredients = dbo.ingredients(), cocktail_id = id)
   with dao.dao_session(db()) as dbo:
     dbo.add_ingredient_to_cocktail(request.form)
-    return redirect(url_for('add_ingredient_to_cocktail', id=id))  
+    return redirect(url_for('add_ingredient_to_cocktail', id=id)) 
+if __name__ == '__main__': 
+  app.run(debug=True, host='0.0.0.0', port=80) 
