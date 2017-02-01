@@ -1,12 +1,9 @@
-from flask import flash, g, Blueprint, render_template, current_app, request, redirect, url_for
+from flask import Flask, flash, g, Blueprint, render_template, current_app, request, redirect, url_for
+from cocktail_app import app
 import dao
 import thread
 import time
 import config as cfg
-
-app = Flask(__name__)
-
-app.secret_key = cfg.secret_key
 
 GPIO_DICT = {}
 mark = {}
@@ -157,5 +154,3 @@ def add_ingredient_to_cocktail(id):
   with dao.dao_session(db()) as dbo:
     dbo.add_ingredient_to_cocktail(request.form)
     return redirect(url_for('add_ingredient_to_cocktail', id=id)) 
-if __name__ == '__main__': 
-  app.run(debug=True, host='0.0.0.0', port=80) 
